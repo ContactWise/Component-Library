@@ -11,7 +11,7 @@ import exp from "constants";
 import React, { FC } from "react";
 import { usePathname } from "next/navigation";
 
-interface BreadcrumbItem {
+export interface BreadcrumbItem {
   href: string;
   label: string;
 }
@@ -19,19 +19,20 @@ interface BreadcrumbItem {
 interface DynamicBreadcrumbsProps {
   path: string;
   separator: React.ReactNode;
+  map?: BreadcrumbItem[];
 }
 
 const DynamicBreadcrumbs: FC<DynamicBreadcrumbsProps> = ({
   path,
   separator,
+  map,
 }) => {
-  const breadcrumbs: BreadcrumbItem[] = path
-    .split("/")
-    .filter((item) => item)
-    .map((item, index, arr) => ({
-      href: `/${arr.slice(0, index + 1).join("/")}`,
-      label: item.charAt(0).toUpperCase() + item.slice(1),
-    }));
+  const breadcrumbs: BreadcrumbItem[] = map
+    ? map
+    : path
+        .split("/")
+        .filter((item) => item)
+        .map((item) => ({ href: `/${item}`, label: item }));
 
   return (
     <Breadcrumb>
