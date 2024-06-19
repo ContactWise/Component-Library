@@ -17,13 +17,14 @@ import {
 } from "../ui/dropdown-menu";
 
 import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
+import { cn, getNestedProperty } from "@/lib/utils";
 import { useRouter } from "next/router";
 import PaginationControls from "./paginationControls";
 
 interface TableHeader {
   name: string;
   label: string;
+  propertyPath?: string;
   render?: (item: Record<string, any>) => JSX.Element;
 }
 
@@ -66,7 +67,11 @@ const PaginatedTable = React.forwardRef<
                 <TableRow key={index}>
                   {columns.map((column) => (
                     <TableCell key={column.name}>
-                      {column.render ? column.render(row) : row[column.name]}
+                      {column.render
+                        ? column.render(row)
+                        : column.propertyPath
+                          ? getNestedProperty(row, column.propertyPath)
+                          : row[column.name]}
                     </TableCell>
                   ))}
                 </TableRow>

@@ -19,6 +19,11 @@ const COLUMNS = [
     name: "description",
     label: "Description",
   },
+  {
+    name: "status",
+    label: "Status",
+    propertyPath: "status.title",
+  },
 ];
 
 const DATA = [
@@ -26,21 +31,37 @@ const DATA = [
     id: "1",
     name: "Event 1",
     description: "Event 1 Description",
+    status: {
+      title: "Active",
+      description: "Event 1 Status",
+    },
   },
   {
     id: "2",
     name: "Event 2",
     description: "Event 2 Description",
+    status: {
+      title: "Inactive",
+      description: "Event 2 Status",
+    },
   },
   {
     id: "3",
     name: "Event 3",
     description: "Event 3 Description",
+    status: {
+      title: "Active",
+      description: "Event 3 Status",
+    },
   },
   {
     id: "4",
     name: "Event 4",
     description: "Event 4 Description",
+    status: {
+      title: "Inactive",
+      description: "Event 4 Status",
+    },
   },
 ];
 
